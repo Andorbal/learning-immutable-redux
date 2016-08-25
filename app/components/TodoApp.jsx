@@ -15,6 +15,7 @@ const TodoApp = React.createClass({
       type: 'add-todo',
       payload: {
         text: this.state.text,
+        finished: false,
         id: Date.now(),
       },
     });
@@ -22,21 +23,36 @@ const TodoApp = React.createClass({
     var nextText = '';
     this.setState({text: nextText});
   },
+  finishTodo(id) {
+    this.props.dispatch({
+      type: 'finish-todo',
+      payload: id,
+    });
+  },
+  removeTodo(id) {
+    this.props.dispatch({
+      type: 'remove-todo',
+      payload: {
+        id,
+        text: this.props.items.find(x => x.id === id).text,
+      }
+    });
+  },
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onChange} value={this.state.text} />
+          <input onChange={this.onChange} value={this.state.text} autoFocus />
           <button>{'Add #' + ((this.props.items.length || 0) + 1)}</button>
         </form>
-        <TodoList items={this.props.items} />
+        <TodoList items={this.props.items} onFinish={this.finishTodo} onRemove={this.removeTodo} />
       </div>
   )}
 });
 
 const mapStateToProps = state => {
   return {
-    items: state.get('todo'),
+    items: state.get('todo').map(x => x.toObject()),
   }
 }
 

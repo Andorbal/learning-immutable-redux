@@ -26,3 +26,19 @@ a:hover {
   color: #27552e;
   border-bottom: 1px solid #27552e;
 }
+
+.todo-list {
+
+}
+
+.todo-list li a {
+  cursor: pointer;
+}
+
+.todo-list li a:first-child {
+  margin-right: 1em;
+}
+
+.todo-list li.finished a:first-child {
+  text-decoration: line-through;
+}
