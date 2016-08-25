@@ -4,7 +4,8 @@ const initialState = Immutable.Map();
 
 const updateCounts = (state, text, modifier) =>
   text.split(' ')
-    .map(x => x.toLowerCase())
+    .map(x => x.toLowerCase().replace(/[^a-z]*/g, ''))
+    .filter(x => x.length > 0)
     .reduce((counts, word) => counts.update(word, x => modifier(x || 0)), state);
 
 const counts = (state = initialState, action) => {

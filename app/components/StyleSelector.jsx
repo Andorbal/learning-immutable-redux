@@ -40,6 +40,7 @@ class StyleSelector extends React.Component {
     return (
       <div className={classnames}>
         <div>
+          <span>Toggle alternate </span>
           <button onClick={e => this.toggleBorder()}>Border</button>
           <button onClick={e => this.toggleFont()}>Font</button>
         </div>

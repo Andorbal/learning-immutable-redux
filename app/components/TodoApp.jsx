@@ -59,7 +59,7 @@ class TodoApp extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input onChange={this.onChange} value={this.state.text} autoFocus />
-          <button>{'Add #' + ((this.props.items.length || 0) + 1)}</button>
+          <button>Add</button>
         </form>
         <TodoList items={this.props.items} onFinish={this.finishTodo} onRemove={this.removeTodo} />
       </div>
