@@ -22,14 +22,18 @@ const Counts = React.createClass({
   )}
 });
 
-const getWords = state => {
-  console.log(`[${number++}] Calculating counts...`);
+const getCounts = state => state.get('counts');
+const getWords = createSelector(
+  [getCounts],
+  counts => {
+    console.log(`[${number++}] Calculating counts...`);
 
-  return state.get('counts')
-    .entrySeq()
-    .map(([key, value]) => ({ word: key, count: value }))
-    .sortBy(x => x.word);
-};
+    return counts
+      .entrySeq()
+      .map(([key, value]) => ({ word: key, count: value }))
+      .sortBy(x => x.word);
+  }
+);
 
 const mapStateToProps = state => {
   return {
