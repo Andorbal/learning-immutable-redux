@@ -1,16 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import TodoList from './TodoList';
 
 let number = 0;
 
-const TodoApp = React.createClass({
-  getInitialState() {
-    return {items: [], text: ''};
-  },
+class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: ''}
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.finishTodo = this.finishTodo.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
   onChange(e) {
     this.setState({text: e.target.value});
-  },
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.dispatch({
@@ -24,13 +33,15 @@ const TodoApp = React.createClass({
 
     var nextText = '';
     this.setState({text: nextText});
-  },
+  }
+
   finishTodo(id) {
     this.props.dispatch({
       type: 'finish-todo',
       payload: id,
     });
-  },
+  }
+
   removeTodo(id) {
     this.props.dispatch({
       type: 'remove-todo',
@@ -39,7 +50,8 @@ const TodoApp = React.createClass({
         text: this.props.items.find(x => x.id === id).text,
       }
     });
-  },
+  }
+
   render() {
     console.log(`[${number++}] Rendering TodoApp...`);
 
@@ -52,13 +64,20 @@ const TodoApp = React.createClass({
         <TodoList items={this.props.items} onFinish={this.finishTodo} onRemove={this.removeTodo} />
       </div>
   )}
-});
+};
+
+const getTodos = state => state.get('todo');
+const transformTodos = createSelector(
+  [getTodos],
+  todos => {
+    console.log(`[${number++}] Calculating TodoApp...`);
+    return todos.map(x => x.toObject());
+  }
+)
 
 const mapStateToProps = state => {
-  console.log(`[${number++}] Calculating TodoApp...`);
-
   return {
-    items: state.get('todo').map(x => x.toObject()),
+    items: transformTodos(state),
   }
 }
 

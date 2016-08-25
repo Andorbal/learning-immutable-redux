@@ -16,7 +16,7 @@ export default class App extends React.Component {
           <h1>&nbsp;</h1>
           <h2>Immutable!</h2>
           <StyleSelector>
-            <div style={{'display': 'flex'}}>
+            <div className='main-content'>
               <TodoApp />
               <Counts />
             </div>

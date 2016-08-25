@@ -28,6 +28,31 @@ a:hover {
   border-bottom: 1px solid #27552e;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: block;
+}
+
+.main-content {
+  display: flex;
+}
+
+.main-content > * {
+  flex-grow: 1;
+}
+
+.main-content > div {
+  flex-basis: 66%;
+}
+
+.main-content > ul {
+  flex-basis: 33%;
+}
+
 .todo-list {
 
 }
