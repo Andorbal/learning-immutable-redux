@@ -1,8 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+
+let number = 0;
 
 const Counts = React.createClass({
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.counts !== nextProps.counts;
+  },
   render() {
+    console.log(`[${number++}] Rendering counts...`);
+
     const createItem = item => (
       <li key={item.word}>{item.word}: {item.count}</li>
     );
@@ -14,14 +22,18 @@ const Counts = React.createClass({
   )}
 });
 
-const mapStateToProps = state => {
-  const words = state.get('counts')
+const getWords = state => {
+  console.log(`[${number++}] Calculating counts...`);
+
+  return state.get('counts')
     .entrySeq()
     .map(([key, value]) => ({ word: key, count: value }))
     .sortBy(x => x.word);
+};
 
+const mapStateToProps = state => {
   return {
-    counts: words,
+    counts: getWords(state),
   }
 }
 
