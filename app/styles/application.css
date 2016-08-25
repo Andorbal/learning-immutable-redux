@@ -1,11 +1,12 @@
+@import 'https://fonts.googleapis.com/css?family=Gloria+Hallelujah';
+
 * {
   box-sizing: border-box;
-  font-family: -apple-system, system, sans-serif;
 }
 
 #content {
-  width: 480px;
-  margin: 0 auto;
+  margin: 0 2em;
+  font-family: -apple-system, system, sans-serif;
 }
 
 h1 {
@@ -41,4 +42,17 @@ a:hover {
 
 .todo-list li.finished a:first-child {
   text-decoration: line-through;
+}
+
+.container {
+  padding: 2em;
+  border: 2px solid black;
+}
+
+.container.alternate-font {
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+.container.alternate-border {
+  border: 2px dashed red;
 }

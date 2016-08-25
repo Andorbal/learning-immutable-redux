@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import counts from './counts';
+import style from './style';
 import todo from './todo';
 
 const combineReducers = value => {
@@ -16,6 +17,7 @@ const combineReducers = value => {
 
 const reducer = combineReducers({
   counts,
+  style,
   todo,
 });
 

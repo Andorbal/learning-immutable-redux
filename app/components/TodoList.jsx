@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+let number = 0;
+
 const TodoList = React.createClass({
   createItem(item) {
     const classnames = classNames({
@@ -14,6 +16,7 @@ const TodoList = React.createClass({
       </li>);
   },
   render() {
+    console.log(`[${number++}] Rendering TodoList...`);
     return <ul className="todo-list">{this.props.items.map(this.createItem)}</ul>;
   }
 });

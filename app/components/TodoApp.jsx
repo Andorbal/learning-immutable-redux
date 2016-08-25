@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TodoList from './TodoList';
 
+let number = 0;
+
 const TodoApp = React.createClass({
   getInitialState() {
     return {items: [], text: ''};
@@ -39,6 +41,8 @@ const TodoApp = React.createClass({
     });
   },
   render() {
+    console.log(`[${number++}] Rendering TodoApp...`);
+
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -51,6 +55,8 @@ const TodoApp = React.createClass({
 });
 
 const mapStateToProps = state => {
+  console.log(`[${number++}] Calculating TodoApp...`);
+
   return {
     items: state.get('todo').map(x => x.toObject()),
   }
